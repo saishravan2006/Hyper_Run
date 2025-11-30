@@ -1,0 +1,41 @@
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.progress {
+    flex: 1;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress--sm {
+    height: 4px;
+}
+
+.progress--md {
+    height: 6px;
+}
+
+.progress--lg {
+    height: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,
+            var(--color-primary),
+            var(--color-primary-hover));
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+.progress-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    min-width: 40px;
+    text-align: right;
+}

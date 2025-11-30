@@ -104,7 +104,7 @@ export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({
     const LANE_HEIGHT = 80;
     const BASE_OFFSET = 40; // Distance from timeline base to first lane
 
-    const [longPressTimer, setLongPressTimer] = React.useState<NodeJS.Timeout | null>(null);
+    const [longPressTimer, setLongPressTimer] = React.useState<ReturnType<typeof setTimeout> | null>(null);
     const isLongPress = React.useRef(false);
 
     const handleSegmentMouseDown = (segmentId: string, e: React.MouseEvent | React.TouchEvent) => {
@@ -121,7 +121,7 @@ export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({
         setLongPressTimer(timer);
     };
 
-    const handleSegmentMouseUp = (segmentId: string, e: React.MouseEvent | React.TouchEvent) => {
+    const handleSegmentMouseUp = (segmentId: string) => {
         if (longPressTimer) {
             clearTimeout(longPressTimer);
             setLongPressTimer(null);
@@ -198,10 +198,10 @@ export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({
                                         top: `${top}px`,
                                     }}
                                     onMouseDown={(e) => handleSegmentMouseDown(segment.id, e)}
-                                    onMouseUp={(e) => handleSegmentMouseUp(segment.id, e)}
+                                    onMouseUp={() => handleSegmentMouseUp(segment.id)}
                                     onMouseLeave={handleSegmentLeave}
                                     onTouchStart={(e) => handleSegmentMouseDown(segment.id, e)}
-                                    onTouchEnd={(e) => handleSegmentMouseUp(segment.id, e)}
+                                    onTouchEnd={() => handleSegmentMouseUp(segment.id)}
                                 >
                                     {/* Connector line from timeline */}
                                     <div
